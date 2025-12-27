@@ -1,4 +1,4 @@
-### Quick Image Copy Browser Extension
+# Quick Image Copy Browser Extension
 
 A simple browser extension to allow for `CTRL + C` to work on hovered images.
 
