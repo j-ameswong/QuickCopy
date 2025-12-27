@@ -1,29 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>Quick Copy Settings</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; }
-        .option { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      .option {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h2>Extension Settings</h2>
-    
-    <div class="option">
-        <label>Activation Key:</label>
-        <input type="text" id="copyKey" maxlength="1" placeholder="e.g. c">
-    </div>
 
     <div class="option">
-        <label>Hover Highlight Color:</label>
-        <input type="color" id="hoverColor" value="#00ff00">
+      <label>Activation Key:</label>
+      <input type="text" id="copyKey" maxlength="1" placeholder="e.g. c" />
     </div>
-
     <button id="save">Save Settings</button>
     <p id="status"></p>
 
     <script src="options.js"></script>
-</body>
+  </body>
 </html>
