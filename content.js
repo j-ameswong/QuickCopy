@@ -1,31 +1,33 @@
+let settings = { copyKey: 'c', hoverColor: '#00ff00' };
 let hoveredElement = null;
 
-// Track what the mouse is currently over
-document.addEventListener("mouseover", (e) => {
-    hoveredElement = e.target;
+// Load settings from storage
+chrome.storage.sync.get(['copyKey', 'hoverColor'], (items) => {
+    if (items.copyKey) settings.copyKey = items.copyKey;
+    if (items.hoverColor) settings.hoverColor = items.hoverColor;
 });
 
-// Listen for the keypress
+document.addEventListener("mouseover", (e) => { hoveredElement = e.target; });
+
 document.addEventListener("keydown", async (e) => {
-    // Check if key is 'c' and mouse is over an IMG tag
-    if (e.key.toLowerCase() === 'c' && hoveredElement && hoveredElement.tagName === 'IMG') {
+    const modKeyPressed = e.ctrlKey;
+
+    if (modKeyPressed && e.key.toLowerCase() === settings.copyKey
+                && hoveredElement?.tagName === 'IMG') {
         try {
             const response = await fetch(hoveredElement.src);
             const blob = await response.blob();
             
             await navigator.clipboard.write([
-                new ClipboardItem({
-                    [blob.type]: blob
-                })
+                new ClipboardItem({ [blob.type]: blob })
             ]);
             
-            console.log("Image copied to clipboard!");
-            // Optional: Visual feedback
-            hoveredElement.style.outline = "3px solid green";
+            // Apply custom hover color for feedback
+            hoveredElement.style.outline = `3px solid ${settings.hoverColor}`;
             setTimeout(() => hoveredElement.style.outline = "", 500);
             
         } catch (err) {
-            console.error("Failed to copy image: ", err);
+            console.error("Copy failed:", err);
         }
     }
 });
