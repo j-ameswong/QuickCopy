@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Quick Copy Image",
+  "version": "1.0",
+  "permissions": ["clipboardWrite", "activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
